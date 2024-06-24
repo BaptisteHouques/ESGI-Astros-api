@@ -1,26 +1,20 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const connectDB = require("./db");
-const { getPlanetes } = require("./src/route/planeteRoute");
-
-// Charger les routes
-getPlanetes();
-
-// Charger les variables d'environnement
-dotenv.config();
-
-// Connecter à MongoDB
-connectDB();
+const express = require('express');
+const connectDB = require('./db');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+// Connecter à MongoDB
+connectDB();
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
 });
 
-// Routes
+// Importer les routes pour les planètes
+const planetRoutes = require('./src/route/planeteRoute');
+app.use('/api/planetes', planetRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+    console.log(`L'application écoute sur le port ${port}`);
 });

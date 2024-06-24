@@ -1,11 +1,8 @@
-const { getPlanete } = require("../controller/planetes/getPlanete");
+const express = require('express');
+const router = express.Router();
+const { getPlanete } = require('../controller/planetes/getPlanete');
 
-// Récupérer toutes les planètes
-export const getPlanetes = async () => {
-  try {
-    const response = await getPlanete();
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-};
+// Route pour obtenir une planète spécifique par ID
+router.get('/:id', getPlanete);
+
+module.exports = router;
