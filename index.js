@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./db");
-const getPlanetes = require("./src/route/planeteRoute");
+const { getPlanetes } = require("./src/route/planeteRoute");
 
 // Charger les routes
 getPlanetes();

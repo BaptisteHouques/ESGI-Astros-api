@@ -1,7 +1,7 @@
 const { getPlanete } = require("../controller/planetes/getPlanete");
 
 // Récupérer toutes les planètes
-const getPlanetes = async () => {
+export const getPlanetes = async () => {
   try {
     const response = await getPlanete();
     return response;
