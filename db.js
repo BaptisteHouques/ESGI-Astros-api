@@ -1,16 +1,20 @@
-// db.js
-const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
+const dotenv = require('dotenv');
 
-const connectDB = async () => {
+dotenv.config();
+
+const uri = process.env.MONGO_URI;
+const client = new MongoClient(uri);
+
+async function connectDB() {
     try {
-        const conn = await mongoose.connect(process.env.MONGO_URI, {
-        });
-
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        await client.connect();
+        console.log('MongoDB connected');
+        return client.db('astros'); // Assurez-vous que c'est le nom correct de votre base de données
     } catch (error) {
-        console.error(`Error: ${error.message}`);
+        console.error('Error connecting to MongoDB:', error);
         process.exit(1);
     }
-};
+}
 
 module.exports = connectDB;

@@ -1,20 +1,19 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./db');
+const connectDB = require('./db'); // Chemin vers db.js
+const constellationRoutes = require('./src/router/constellationRoute'); // Chemin vers starRoutes.js
+const starRoutes = require('./src/router/starRoute'); // Chemin vers starRoutes.js
 
-// Charger les variables d'environnement
 dotenv.config();
-
-// Connecter à MongoDB
-connectDB();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// Connexion à la base de données
+connectDB();
+
+app.use('/api', constellationRoutes, starRoutes);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Server running on port ${port}`);
 });

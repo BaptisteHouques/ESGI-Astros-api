@@ -1,1 +1,0 @@
-// A faire : Récupérer les étoiles d'un utilisateur
